@@ -1,0 +1,188 @@
+/* === LOGIN PAGE STYLES === */
+body.login-bg {
+  background: linear-gradient(to right, #18bc9c, #2c3e50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+
+.login-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
+  animation: slide-up 0.5s ease;
+}
+
+.login-card h2 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.login-card input:focus {
+  border-color: #18bc9c;
+  outline: none;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  background: #18bc9c;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  background: #149e82;
+  transform: translateY(-1px);
+}
+
+.error-msg {
+  background-color: #ffe3e3;
+  color: #c0392b;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* === ANIMATIONS === */
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* === BUTTONS === */
+button, .logout-link, .back-btn {
+  transition: all 0.3s ease;
+}
+
+/* === TABLE ROW HOVER === */
+table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+/* === DASHBOARD STYLE === */
+.dashboard h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+  color: #2c3e50;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 5px solid #18bc9c;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.card.alert {
+  border-left-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.logout-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.logout-link:hover {
+  background-color: #c0392b;
+}
+
+/* === ACCESS DENIED PAGE === */
+body.access-denied-bg {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.access-box {
+  background: white;
+  color: #e74c3c;
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.access-box h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.access-box p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.back-btn {
+  padding: 10px 16px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-btn:hover {
+  background: #c0392b;
+}
