@@ -1,0 +1,1117 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chikibibi Inventory Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .login-bg {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        }
+        .admin-bg {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+        .staff-bg {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+        .section-card {
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.mx-2{margin-left:0.5rem;margin-right:0.5rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-2{margin-left:0.5rem}.ml-auto{margin-left:auto}.mr-1{margin-right:0.25rem}.mr-2{margin-right:0.5rem}.mr-4{margin-right:1rem}.mt-1{margin-top:0.25rem}.mt-4{margin-top:1rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-8{height:2rem}.max-h-80{max-height:20rem}.min-h-screen{min-height:100vh}.w-16{width:4rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-8{width:2rem}.w-full{width:100%}.min-w-full{min-width:100%}.max-w-md{max-width:28rem}.flex-grow{flex-grow:1}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-blue-500{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.bg-green-100{--tw-bg-opacity:1;background-color:rgb(220 252 231 / var(--tw-bg-opacity, 1))}.bg-green-50{--tw-bg-opacity:1;background-color:rgb(240 253 244 / var(--tw-bg-opacity, 1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94 / var(--tw-bg-opacity, 1))}.bg-purple-100{--tw-bg-opacity:1;background-color:rgb(243 232 255 / var(--tw-bg-opacity, 1))}.bg-purple-50{--tw-bg-opacity:1;background-color:rgb(250 245 255 / var(--tw-bg-opacity, 1))}.bg-purple-500{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.bg-red-100{--tw-bg-opacity:1;background-color:rgb(254 226 226 / var(--tw-bg-opacity, 1))}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-yellow-100{--tw-bg-opacity:1;background-color:rgb(254 249 195 / var(--tw-bg-opacity, 1))}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232 / var(--tw-bg-opacity, 1))}.bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8 / var(--tw-bg-opacity, 1))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-pink-500{--tw-gradient-from:#ec4899 var(--tw-gradient-from-position);--tw-gradient-to:rgb(236 72 153 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-red-500{--tw-gradient-to:#ef4444 var(--tw-gradient-to-position)}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.text-left{text-align:left}.text-center{text-align:center}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.leading-normal{line-height:1.5}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-green-500{--tw-text-opacity:1;color:rgb(34 197 94 / var(--tw-text-opacity, 1))}.text-green-800{--tw-text-opacity:1;color:rgb(22 101 52 / var(--tw-text-opacity, 1))}.text-pink-500{--tw-text-opacity:1;color:rgb(236 72 153 / var(--tw-text-opacity, 1))}.text-purple-500{--tw-text-opacity:1;color:rgb(168 85 247 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-red-800{--tw-text-opacity:1;color:rgb(153 27 27 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-500{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.text-yellow-800{--tw-text-opacity:1;color:rgb(133 77 14 / var(--tw-text-opacity, 1))}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-300:hover{--tw-bg-opacity:1;background-color:rgb(209 213 219 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-50:hover{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.hover\:bg-green-600:hover{--tw-bg-opacity:1;background-color:rgb(22 163 74 / var(--tw-bg-opacity, 1))}.hover\:bg-purple-600:hover{--tw-bg-opacity:1;background-color:rgb(147 51 234 / var(--tw-bg-opacity, 1))}.hover\:bg-red-600:hover{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.hover\:bg-yellow-600:hover{--tw-bg-opacity:1;background-color:rgb(202 138 4 / var(--tw-bg-opacity, 1))}.hover\:from-pink-600:hover{--tw-gradient-from:#db2777 var(--tw-gradient-from-position);--tw-gradient-to:rgb(219 39 119 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:to-red-600:hover{--tw-gradient-to:#dc2626 var(--tw-gradient-to-position)}.hover\:text-blue-700:hover{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.hover\:text-pink-600:hover{--tw-text-opacity:1;color:rgb(219 39 119 / var(--tw-text-opacity, 1))}.hover\:text-red-700:hover{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.hover\:text-yellow-700:hover{--tw-text-opacity:1;color:rgb(161 98 7 / var(--tw-text-opacity, 1))}.focus\:border-blue-300:focus{--tw-border-opacity:1;border-color:rgb(147 197 253 / var(--tw-border-opacity, 1))}.focus\:border-green-300:focus{--tw-border-opacity:1;border-color:rgb(134 239 172 / var(--tw-border-opacity, 1))}.focus\:border-pink-300:focus{--tw-border-opacity:1;border-color:rgb(249 168 212 / var(--tw-border-opacity, 1))}.focus\:border-purple-300:focus{--tw-border-opacity:1;border-color:rgb(216 180 254 / var(--tw-border-opacity, 1))}.focus\:border-yellow-300:focus{--tw-border-opacity:1;border-color:rgb(253 224 71 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-blue-300:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(147 197 253 / var(--tw-ring-opacity, 1))}.focus\:ring-green-300:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(134 239 172 / var(--tw-ring-opacity, 1))}.focus\:ring-pink-300:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(249 168 212 / var(--tw-ring-opacity, 1))}.focus\:ring-pink-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(244 114 182 / var(--tw-ring-opacity, 1))}.focus\:ring-pink-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(236 72 153 / var(--tw-ring-opacity, 1))}.focus\:ring-purple-300:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(216 180 254 / var(--tw-ring-opacity, 1))}.focus\:ring-yellow-300:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(253 224 71 / var(--tw-ring-opacity, 1))}.focus\:ring-opacity-50:focus{--tw-ring-opacity:0.5}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}}</style><style type="text/css">:root [href^="//mage98rquewz.com/"], :root [href^="//x4pollyxxpush.com/"], :root span[id^="ezoic-pub-ad-placeholder-"], :root ins.adsbygoogle[data-ad-slot], :root ins.adsbygoogle[data-ad-client], :root img[src^="https://s-img.adskeeper.com/"], :root guj-ad, :root gpt-ad, :root div[id^="zergnet-widget"], :root div[id^="vuukle-ad-"], :root div[id^="taboola-stream-"], :root div[id^="sticky_ad_"], :root div[id^="st"][style^="z-index: 999999999;"], :root div[id^="gpt_ad_"], :root div[id^="ezoic-pub-ad-"], :root div[id^="dfp-ad-"], :root div[id^="crt-"][style], :root div[id^="adspot-"], :root div[id^="adrotate_widgets-"], :root ps-connatix-module, :root div[id^="ad_position_"], :root div[id^="ad-div-"], :root div[id*="ScriptRoot"], :root div[id*="MarketGid"], :root div[data-id-advertdfpconf], :root div[data-dfp-id], :root hl-adsense, :root div[data-contentexchange-widget], :root div[data-alias="300x250 Ad 2"], :root div[data-adzone], :root div[data-adunit-path], :root div[data-adname], :root div[data-ad-targeting], :root div[data-ad-region], :root div[data-ad-placeholder], :root div[aria-label="Ads"], :root display-ads, :root display-ad-component, :root atf-ad-slot, :root aside[id^="adrotate_widgets-"], :root amp-fx-flying-carpet, :root amp-embed[type="taboola"], :root amp-connatix-player, :root amp-ad-custom, :root amp-ad, :root div[id^="google_dfp_"], :root ad-slot, :root ad-shield-ads, :root a[style="width:100%;height:100%;z-index:10000000000000000;position:absolute;top:0;left:0;"], :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"] + .ob_source, :root a[href^="https://xbet-4.com/"], :root div[id^="ad-position-"], :root a[href^="https://www.toprevenuegate.com/"], :root a[href^="https://www.purevpn.com/"][href*="&utm_source=aff-"], :root a[href^="https://www.privateinternetaccess.com/"] > img, :root a[href^="https://www.onlineusershielder.com/"], :root a[href^="https://financeads.net/tc.php?"], :root a[href^="https://www.mrskin.com/tour"], :root a[href^="https://www.infowarsstore.com/"] > img, :root a[href^="https://www.highperformancecpmgate.com/"], :root a[href^="https://www.highcpmrevenuenetwork.com/"], :root a[href^="https://www.get-express-vpn.com/offer/"], :root a[href^="https://lnkxt.bannerator.com/"], :root a[href^="https://www.geekbuying.com/dynamic-ads/"], :root a[href^="https://www.financeads.net/tc.php?"], :root a[href^="https://www.effectiveratecpm.com/"], :root [href^="https://www.herbanomic.com/"] > img, :root a[href^="https://maymooth-stopic.com/"], :root a[href^="https://www.dql2clk.com/"], :root a[href^="https://www.nutaku.net/signup/landing/"], :root a[href^="https://www.dating-finder.com/signup/?ai_d="], :root a[href^="https://explore-site.com/"], :root a[href^="https://www.brazzersnetwork.com/landing/"], :root a[href^="https://www.adxsrve.com/"], :root [data-template-type="nativead"], :root a[href^="https://www.endorico.com/Smartlink/"], :root a[href^="https://www.adultempire.com/"][href*="?partner_id="], :root a[href^="https://voluum.prom-xcams.com/"], :root a[href^="https://twinrdsyte.com/"], :root a[href^="https://twinrdsrv.com/"], :root a[href^="https://trk.nfl-online-streams.club/"], :root a[href^="https://tracking.avapartner.com/"], :root a[href^="https://track.wg-aff.com"], :root a[href^="https://track.ultravpn.com/"], :root a[href^="https://track.afcpatrk.com/"], :root a[href^="https://torguard.net/aff.php"] > img, :root [data-identity="adhesive-ad"], :root a[href^="https://tc.tradetracker.net/"] > img, :root a[href^="https://tatrck.com/"], :root a[href^="https://click.candyoffers.com/"], :root [href^="https://zstacklife.com/"] img, :root a[href^="https://t.aslnk.link/"], :root a[href^="https://t.adating.link/"], :root a[href^="https://go.trackitalltheway.com/"], :root [href^="https://track.fiverr.com/visit/"] > img, :root a[href^="https://syndication.exoclick.com/"], :root a[href^="https://syndication.dynsrvtbg.com/"], :root div[data-alias="300x250 Ad 1"], :root a[href^="https://syndicate.contentsserved.com/"], :root a[href^="https://svb-analytics.trackerrr.com/"], :root a[href^="https://ad.doubleclick.net/"], :root a[href^="https://static.fleshlight.com/images/banners/"], :root a[href^="https://slkmis.com/"], :root bottomadblock, :root a[href^="https://s.zlinkd.com/"], :root a[href^="https://s.zlink3.com/"], :root a[href^="https://www.mrskin.com/account/"], :root a[href^="https://s.optzsrv.com/"], :root a[href^="https://s.ma3ion.com/"], :root a[href^="https://s.eunow4u.com/"], :root #kt_player > div[style$="display: block;"][style*="inset: 0px;"], :root [href$="/sexdating.php"], :root a[href^="https://quotationfirearmrevision.com/"], :root a[href^="https://pubads.g.doubleclick.net/"], :root a[href^="https://prf.hn/click/"][href*="/camref:"] > img, :root a[href^="https://www.dating-finder.com/?ai_d="], :root a[href^="https://serve.awmdelivery.com/"], :root a[href^="https://prf.hn/click/"][href*="/adref:"] > img, :root app-ad, :root [href^="https://ap.octopuspop.com/click/"] > img, :root a[href^="https://postback1win.com/"], :root a[href^="https://mmwebhandler.aff-online.com/"], :root a[href^="https://www.bet365.com/"][href*="affiliate="], :root a[href^="https://pb-track.com/"], :root a[href^="https://pb-front.com/"], :root a[href^="https://paid.outbrain.com/network/redir?"], :root a[href^="https://streamate.com/landing/click/"], :root div[class^="Adstyled__AdWrapper-"], :root a[href^="https://osfultrbriolenai.info/"], :root a[href^="https://upsups.click/"], :root a[href^="https://ndt5.net/"], :root a[href^="https://natour.naughtyamerica.com/track/"], :root a[href^="https://mediaserver.entainpartners.com/renderBanner.do?"], :root a[href^="https://m.do.co/c/"] > img, :root a[href^="https://lead1.pl/"], :root a[href^="https://landing.brazzersnetwork.com/"], :root a[href^="https://join.virtuallust3d.com/"], :root a[href^="https://kiksajex.com/"], :root a[href^="https://juicyads.in/"], :root a[href^="https://snowdayonline.xyz/"], :root a[href^="https://mediaserver.gvcaffiliates.com/renderBanner.do?"], :root a[href^="https://join.dreamsexworld.com/"], :root a[href^="https://jaxofuna.com/"], :root a[href^="https://italarizege.xyz/"], :root a[href^="https://iqbroker.com/"][href*="?aff="], :root a[href^="https://identicaldrench.com/"], :root a[href^="https://hot-growngames.life/"], :root a[href^="https://helmethomicidal.com/"], :root a[href^="https://golinks.work/"], :root ark-top-ad, :root a[href^="https://s.zlinkn.com/"], :root a[href^="https://go.xxxvjmp.com/"], :root [class^="tile-picker__CitrusBannerContainer-sc-"], :root a[href^="https://go.xxxiijmp.com"], :root a[href^="https://go.xtbaffiliates.com/"], :root [data-role="tile-ads-module"], :root a[href^="https://go.xlviirdr.com"], :root div[class$="-adlabel"], :root a[href^="https://go.xlviiirdr.com"], :root a[href^="https://ismlks.com/"], :root [href^="https://www.mypillow.com/"] > img, :root a[href^="https://go.xlirdr.com"], :root [data-css-class="dfp-inarticle"], :root a[href^="https://l.hyenadata.com/"], :root a[href^="https://go.tmrjmp.com"], :root a[href^="https://zirdough.net/"], :root a[href^="https://s.deltraff.com/"], :root a[href^="https://go.markets.com/visit/?bta="], :root a[href^="https://billing.purevpn.com/aff.php"] > img, :root a[href^="https://go.hpyrdr.com/"], :root a[href^="https://lijavaxa.com/"], :root a[href^="https://go.goaserv.com/"], :root a[href^="https://t.hrtye.com/"], :root a[href^="https://go.etoro.com/"] > img, :root a[href^="https://go.dmzjmp.com"], :root a[href^="https://www.bang.com/?aff="], :root #mgb-container > #mgb, :root a[href^="https://go.admjmp.com"], :root a[href^="https://ak.stikroltiltoowi.net/"], :root a[href^="https://get.surfshark.net/aff_c?"][href*="&aff_id="] > img, :root a[href^="https://www.adskeeper.com"], :root a[data-redirect^="https://paid.outbrain.com/network/redir?"], :root [href^="https://clicks.affstrack.com/"] > img, :root a[href^="https://ak.hauchiwu.com/"], :root a[href^="https://engine.phn.doublepimp.com/"], :root a[href^="https://engine.blueistheneworanges.com/"], :root a[href^="https://drumskilxoa.click/"], :root a[href^="https://dl-protect.net/"], :root a[href*=".foxqck.com/"], :root a[href^="https://ctosrd.com/"], :root a[href^="https://clixtrac.com/"], :root [href^="https://noqreport.com/"] > img, :root a[href^="https://clicks.pipaffiliates.com/"], :root app-advertisement, :root a[href^="https://getmatchedlocally.com/"], :root a[href^="https://clickins.slixa.com/"], :root a[href^="https://datewhisper.life/"], :root a[href^="https://get-link.xyz/"], :root a[href^="https://click.linksynergy.com/fs-bin/"] > img, :root a[href^="https://combodef.com/"], :root a[href^="https://click.hoolig.app/"], :root a[href^="https://click.ggpickaff.com/"], :root a[href^="https://track.totalav.com/"], :root a[href^="https://ctrdwm.com/"], :root img[src^="https://images.purevpnaffiliates.com"], :root a[href^="https://porntubemate.com/"], :root a[href^="https://clickadilla.com/"], :root a[href^="https://click.dtiserv2.com/"], :root a[href^="https://go.xlvirdr.com"], :root a[href^="http://www.iyalc.com/"], :root a[href^="https://claring-loccelkin.com/"], :root a[href^="https://bongacams2.com/track?"], :root a[href^="https://t.ajrkm1.com/"], :root a[href^="https://bongacams10.com/track?"], :root a[href^="https://www.sheetmusicplus.com/"][href*="?aff_id="], :root a[href^="https://bngpt.com/"], :root a[href^="https://black77854.com/"], :root a[href^="https://rixofa.com/"], :root #ads[style^="position: absolute; z-index: 30; width: 100%; height"], :root a[href^="https://disobediencecalculatormaiden.com/"], :root a[href^="https://best-experience-cool.com/"], :root a[href^="https://banners.livepartners.com/"], :root a[href^="https://myclick-2.com/"], :root a[href^="https://sexynearme.com/"], :root a[href^="https://baipahanoop.net/"], :root a[href^="http://revolvemockerycopper.com/"], :root a[href^="https://awptjmp.com/"], :root a[href^="https://join.sexworld3d.com/track/"], :root a[href^="https://aweptjmp.com/"], :root a[href^="https://ausoafab.net/"], :root a[href^="https://adclick.g.doubleclick.net/"], :root a[href^="https://aj1070.online/"], :root a[href^="https://bc.game/"], :root a[href^="https://ak.oalsauwy.net/"], :root a[href^="https://a.bestcontentoperation.top/"], :root a[href^="https://adultfriendfinder.com/go/"], :root a[href^="https://ads.planetwin365affiliate.com/"], :root a[href^="https://ads.leovegas.com/"], :root .nya-slot[style], :root a[href^="https://a.bestcontentweb.top/"], :root a[href^="https://a2.adform.net/"], :root a[href^="https://a.candyai.love/"], :root a[href^="https://playnano.online/offerwalls/?ref="], :root a[href^="https://a.adtng.com/"], :root .banner-img > .pbl, :root [data-m-ad-id], :root a[href^="https://a-ads.com/"], :root [id^="ad_slider"], :root a[href^="https://click.ggpickyaff.com/"], :root broadstreet-zone-container, :root a[href^="https://ak.psaltauw.net/"], :root a[href^="https://1winpb.com/"], :root div[id^="rc-widget-"], :root a[href^="http://eslp34af.click/"], :root a[href^="https://turnstileunavailablesite.com/"], :root a[href^="https://chaturbate.com/in/?"], :root a[href^="https://prf.hn/click/"][href*="/creativeref:"] > img, :root a[href*="&maxads="], :root a[href^="http://www.adultempire.com/unlimited/promo?"][href*="&partner_id="], :root a[href^="https://1betandgonow.com/"], :root a[href^="https://eergortu.net/"], :root div[id^="optidigital-adslot"], :root a[href^="https://123-stream.org/"], :root a[href^="https://in.rabbtrk.com/"], :root a[href^="http://www.h4trck.com/"], :root a[href^="http://www.friendlyduck.com/AF_"], :root a[href^="https://go.rmhfrtnd.com"], :root a[href^="https://allhost.shop/aff.php?"], :root [data-dynamic-ads], :root a[href^="http://vnte9urn.click/"], :root a[href^="http://troopsassistedstupidity.com/"], :root a[href^="http://trk.globwo.online/"], :root a[href^="https://random-affiliate.atimaze.com/"], :root a-ad, :root a[href^="https://offhandpump.com/"], :root a[href^="http://stickingrepute.com/"], :root #slashboxes > .deals-rail, :root a[href^="http://roadcontagion.com/"], :root a[href^="http://premonitioninventdisagree.com/"], :root a[href^="http://cam4com.go2cloud.org/aff_c?"], :root a[href^="https://ads.betfair.com/redirect.aspx?"], :root [href^="https://www.mypatriotsupply.com/"] > img, :root a[href^="https://trk.softonixs.xyz/"], :root [data-advadstrackid], :root a[href^="http://muzzlematrix.com/"], :root a[href^="https://track.adform.net/"], :root a[href^="http://avthelkp.net/"], :root a[href^="https://a.medfoodhome.com/"], :root a[href^="https://engine.flixtrial.com/"], :root [data-type="ad-vertical"], :root [data-taboola-options], :root a[href^="http://annulmentequitycereals.com/"], :root a[href^="//startgaming.net/tienda/" i], :root a[href^="https://join.virtualtaboo.com/track/"], :root [id^="ad_sky"], :root a[href^="http://coefficienttolerategravel.com/"], :root a[href^="https://a.medfoodsafety.com/"], :root a[href^="//go.eabids.com/"], :root a[href^="//ejitsirdosha.net/"], :root a[href^=" https://www.friendlyduck.com/AF_"], :root [data-cl-spot-id], :root a[href*="/jump/next.php?r="], :root a[href^="https://go.rmishe.com/"], :root [href^="https://ilovemyfreedoms.com/landing-"], :root a[href^="https://syndication.optimizesrv.com/"], :root a[href*="//daichoho.com/"], :root a[href^="https://go.nordvpn.net/aff"] > img, :root .\[\&_\.gdprAdTransparencyCogWheelButton\]\:\!pjra-z-\[5\], :root [href^="http://clicks.totemcash.com/"], :root a[href^="https://ad.zanox.com/ppc/"] > img, :root a[href^="https://lone-pack.com/"], :root [data-d-ad-id], :root a[href*=".engine.adglare.net/"], :root a[href^="https://t.ajrkm3.com/"], :root [href^="https://aads.com/campaigns/"], :root a[href^="//stighoazon.com/"], :root [href^="https://www.profitablegatecpm.com/"], :root div[id^="lazyad-"], :root a[href^="http://com-1.pro/"], :root a[href*=".cfm?domain="][href*="&fp="], :root [data-ad-name], :root a[href^="https://loboclick.com/"], :root a[data-url^="https://vulpix.bet/?ref="], :root a[href^="https://ab.advertiserurl.com/aff/"], :root a[data-oburl^="https://paid.outbrain.com/network/redir?"], :root a[href^="https://go.xlivrdr.com"], :root [onclick^="location.href='https://1337x.vpnonly.site/"], :root [name^="google_ads_iframe"], :root [id^="section-ad-banner"], :root a[href^="https://www.goldenfrog.com/vyprvpn?offer_id="][href*="&aff_id="], :root a[href*="//jjgirls.com/sex/Chaturbate"], :root [id^="ad-wrap-"], :root [href^="https://zone.gotrackier.com/"], :root a[href^="http://sarcasmadvisor.com/"], :root [href^="https://www.restoro.com/"], :root [href^="https://www.targetingpartner.com/"], :root .section-subheader > .section-hotel-prices-header, :root [href^="https://www.hostg.xyz/"] > img, :root a[href^="http://adultfriendfinder.com/go/"], :root a[href^="https://fastestvpn.com/lifetime-special-deal?a_aid="], :root a[href^="https://tour.mrskin.com/"], :root [href^="https://www.brighteonstore.com/products/"] img, :root citrus-ad-wrapper, :root a[href^="https://go.grinsbest.com/"], :root a[href^="https://vo2.qrlsx.com/"], :root [href^="https://www.avantlink.com/click.php"] img, :root a[href^="https://t.acam.link/"], :root a[href^="https://go.strpjmp.com/"], :root [href^="https://url.totaladblock.com/"], :root div[id^="div-ads-"], :root [href^="https://rapidgator.net/article/premium/ref/"], :root [href^="https://join.girlsoutwest.com/"], :root a[href^="https://activate-game.com/"], :root .scroll-fixable.rail-right > .deals-rail, :root [data-wpas-zoneid], :root a[href^="https://track.aftrk3.com/"], :root [href^="https://join3.bannedsextapes.com"], :root a[href^="https://bodelen.com/"], :root a[href*=".g2afse.com/"], :root div[id^="adngin-"], :root [data-rc-widget], :root span[data-ez-ph-id], :root [href^="https://track.aftrk1.com/"], :root [href^="https://join.playboyplus.com/track/"], :root a[href^="https://go.xxxijmp.com"], :root [href^="https://istlnkcl.com/"], :root a[href^="https://tm-offers.gamingadult.com/"], :root [href^="https://charmingdatings.life/"], :root [href^="https://glersakr.com/"], :root a[href^="https://a.bestcontentfood.top/"], :root [href^="https://cpa.10kfreesilver.com/"], :root [data-id^="div-gpt-ad"], :root a[href^="https://tracker.loropartners.com/"], :root [href^="https://awbbjmp.com/"], :root div[ow-ad-unit-wrapper], :root a[data-href^="http://ads.trafficjunky.net/"], :root a[href^="http://partners.etoro.com/"], :root a[href^="https://www.friendlyduck.com/AF_"], :root [href^="https://ad1.adfarm1.adition.com/"], :root a[href^="https://bngprm.com/"], :root [href^="https://shiftnetwork.infusionsoft.com/go/"] > img, :root a[href^="https://go.bushheel.com/"], :root a[href^="https://ctjdwm.com/"], :root a[href^="https://camfapr.com/landing/click/"], :root div[data-ad-wrapper], :root .gnt_em_vp_c[data-g-s="vp_dk"], :root [href="//sexcams.plus/"], :root [href^="http://www.mypillow.com/"] > img, :root a[href^="https://promerycergerful.com/"], :root #kt_player > a[target="_blank"], :root a[href^="http://bongacams.com/track?"], :root [href^="http://mypillow.com/"] > img, :root [href="https://ourgoldguy.com/contact/"] img, :root .ob_container .item-container-obpd, :root [id^="div-gpt-ad"], :root a[href^="https://go.rmhfrtnd.com/"], :root [href="https://jdrucker.com/gold"] > img, :root a[href^="https://www.liquidfire.mobi/"], :root .grid > .container > #aside-promotion, :root DFP-AD, :root [href^="https://go.xlrdr.com"], :root a[href^="https://s.cant3am.com/"], :root [data-testid^="taboola-"], :root a[href^="https://track.1234sd123.com/"], :root zeus-ad, :root [data-testid="prism-ad-wrapper"], :root [href^="https://ad.admitad.com/"], :root [href^="https://mypillow.com/"] > img, :root [data-testid="ad_testID"], :root [href^="https://antiagingbed.com/discount/"] > img, :root a[href*=".adsrv.eacdn.com/"], :root [href^="https://optimizedelite.com/"] > img, :root [data-name="adaptiveConstructorAd"], :root a[href^="https://go.cmtaffiliates.com/"], :root [data-testid="adBanner-wrapper"], :root [href^="https://mylead.global/stl/"] > img, :root [href^="https://mypatriotsupply.com/"] > img, :root a[href^="https://go.hpyjmp.com"], :root iframe[scrolling="no"][sandbox*="allow-popups allow-modals"][style^="width: 100%; height: 100%; border: none;"], :root [href^="https://mystore.com/"] > img, :root a[href^="https://81ac.xyz/"], :root [href^="https://wct.link/click?"], :root div[data-adunit], :root app-large-ad, :root [href^="https://turtlebids.irauctions.com/"] img, :root a[href^="https://believessway.com/"], :root a[href^="https://witnessjacket.com/"], :root [data-mobile-ad-id], :root [class^="amp-ad-"], :root a[href^="http://handgripvegetationhols.com/"], :root a[href^="https://go.bbrdbr.com"], :root a[href^="https://fc.lc/ref/"], :root [data-adshim], :root topadblock, :root a[href^="//s.zlinkd.com/"], :root #teaser1[style^="width:autopx;"], :root [href^="https://www.cloudways.com/en/?id"], :root [data-asg-ins], :root a[href^="https://gamingadlt.com/?offer="], :root [data-desktop-ad-id], :root [data-adbridg-ad-class], :root #teaser3[style^="width:autopx;"], :root [data-adblockkey], :root [data-block-type="ad"], :root [data-ad-width], :root [onclick*="content.ad/"], :root [data-ad-manager-id], :root AMP-AD, :root [data-ad-cls], :root [data-ez-name], :root a[href^="https://go.mnaspm.com/"], :root a[href^="https://service.bv-aff-trx.com/"], :root a[href^="https://6-partner.com/"], :root [class^="s2nPlayer"], :root a[href^="https://traffdaq.com/"], :root [data-testid="commercial-label-taboola"], :root [class^="div-gpt-ad"], :root a[href^="http://tc.tradetracker.net/"] > img, :root a[href^="https://www8.smartadserver.com/"], :root a[href^="https://pb-imc.com/"], :root [href^="https://affiliate.fastcomet.com/"] > img, :root [class^="adDisplay-module"], :root [data-freestar-ad][id], :root AD-SLOT, :root a[href^="https://www.googleadservices.com/pagead/aclk?"] > img, :root [data-ad-module], :root a[href^="https://go.skinstrip.net"][href*="?campaignId="], :root #teaser2[style^="width:autopx;"], :root [data-revive-zoneid], :root a[href^="https://losingoldfry.com/"], :root div[id^="div-gpt-"], :root a[href^="https://gml-grp.com/"], :root .ob_dual_right > .ob_ads_header ~ .odb_div, :root a[href^="https://cam4com.go2cloud.org/"], :root a[href^="http://li.blogtrottr.com/click?"], :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"], :root a[href^="https://t.ajump1.com/"], :root a[href^="https://go.xxxjmp.com"], :root #leader-companion > a[href], :root a[href^="https://wittered-mainging.com/"], :root #teaser3[style="width: 100%;text-align: center;display: scroll;position:fixed;bottom: 0;margin: 0 auto;z-index: 103;"], :root [href^="https://wwp.hoqodd.com/redirect-zone/"] { display: none !important; }</style></head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="min-h-screen flex items-center justify-center login-bg p-4">
+        <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
+            <div class="text-center mb-8">
+                <svg class="mx-auto h-16 w-16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" stroke="#FF6B6B" stroke-width="8"></circle>
+                    <path d="M30 50L45 65L70 35" stroke="#FF6B6B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <h1 class="text-3xl font-bold mt-4 text-gray-800">Chikibibi</h1>
+                <p class="text-gray-600">Inventory Management System</p>
+            </div>
+            <form>
+                <div class="mb-6">
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300" placeholder="Enter your username">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300" placeholder="Enter your password">
+                </div>
+                <div class="mb-6 flex items-center">
+                    <input type="checkbox" id="remember" class="h-4 w-4 text-pink-500 focus:ring-pink-400 border-gray-300 rounded">
+                    <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                    <a href="#" class="ml-auto text-sm text-pink-500 hover:text-pink-600">Forgot password?</a>
+                </div>
+                <div class="mb-6">
+                    <select id="user-type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300">
+                        <option value="admin">Admin</option>
+                        <option value="staff">Inventory Staff</option>
+                    </select>
+                </div>
+                <button type="button" onclick="login()" class="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-2 px-4 rounded-md hover:from-pink-600 hover:to-red-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50 transition duration-200">
+                    Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="hidden min-h-screen admin-bg">
+        <nav class="bg-white shadow-md p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8 mr-2" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" stroke="#4A89DC" stroke-width="8"></circle>
+                        <path d="M30 50L45 65L70 35" stroke="#4A89DC" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-gray-800">Chikibibi Admin</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="mr-4">
+                        <span class="text-sm text-gray-600">Welcome, Admin</span>
+                    </div>
+                    <button onclick="logout()" class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-sm transition duration-200">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="admin-main" class="container mx-auto p-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Admin Dashboard</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Manage Users -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showAdminSection('manage-users')">
+                    <div class="p-6">
+                        <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Manage Users</h2>
+                        <p class="text-gray-600">Add, edit, or remove system users and manage permissions</p>
+                    </div>
+                    <div class="bg-blue-50 px-6 py-3">
+                        <span class="text-blue-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+
+                <!-- Manage Inventory -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showAdminSection('manage-inventory')">
+                    <div class="p-6">
+                        <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Manage Inventory</h2>
+                        <p class="text-gray-600">Add new items, update stock levels, and manage product categories</p>
+                    </div>
+                    <div class="bg-purple-50 px-6 py-3">
+                        <span class="text-purple-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+
+                <!-- Manage Suppliers -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showAdminSection('manage-suppliers')">
+                    <div class="p-6">
+                        <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Manage Suppliers</h2>
+                        <p class="text-gray-600">Add and manage supplier information and purchase orders</p>
+                    </div>
+                    <div class="bg-green-50 px-6 py-3">
+                        <span class="text-green-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+
+                <!-- Transactions -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showAdminSection('transactions')">
+                    <div class="p-6">
+                        <div class="bg-yellow-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Transactions</h2>
+                        <p class="text-gray-600">View and manage all inventory transactions and history</p>
+                    </div>
+                    <div class="bg-yellow-50 px-6 py-3">
+                        <span class="text-yellow-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+
+                <!-- Low Stock Alerts -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showAdminSection('low-stock-alerts')">
+                    <div class="p-6">
+                        <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Low Stock Alerts</h2>
+                        <p class="text-gray-600">View items that need to be restocked and set alert thresholds</p>
+                    </div>
+                    <div class="bg-red-50 px-6 py-3">
+                        <span class="text-red-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Section: Manage Users -->
+        <div id="admin-manage-users" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToAdminDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Manage Users</h1>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">User List</h2>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md flex items-center transition duration-200">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Add New User
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm leading-normal">
+                                <th class="py-3 px-4 text-left">ID</th>
+                                <th class="py-3 px-4 text-left">Name</th>
+                                <th class="py-3 px-4 text-left">Email</th>
+                                <th class="py-3 px-4 text-left">Role</th>
+                                <th class="py-3 px-4 text-left">Status</th>
+                                <th class="py-3 px-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">001</td>
+                                <td class="py-3 px-4">John Doe</td>
+                                <td class="py-3 px-4">john@chikibibi.com</td>
+                                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">Admin</span></td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Active</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">002</td>
+                                <td class="py-3 px-4">Jane Smith</td>
+                                <td class="py-3 px-4">jane@chikibibi.com</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Staff</span></td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Active</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">003</td>
+                                <td class="py-3 px-4">Robert Johnson</td>
+                                <td class="py-3 px-4">robert@chikibibi.com</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Staff</span></td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">Inactive</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Section: Manage Inventory -->
+        <div id="admin-manage-inventory" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToAdminDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Manage Inventory</h1>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Inventory Items</h2>
+                    <button class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md flex items-center transition duration-200">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Add New Item
+                    </button>
+                </div>
+
+                <div class="mb-4 flex flex-wrap gap-2">
+                    <input type="text" placeholder="Search items..." class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 flex-grow">
+                    <select class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300">
+                        <option>All Categories</option>
+                        <option>Electronics</option>
+                        <option>Clothing</option>
+                        <option>Food</option>
+                    </select>
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md transition duration-200">
+                        Filter
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm leading-normal">
+                                <th class="py-3 px-4 text-left">ID</th>
+                                <th class="py-3 px-4 text-left">Item Name</th>
+                                <th class="py-3 px-4 text-left">Category</th>
+                                <th class="py-3 px-4 text-left">Quantity</th>
+                                <th class="py-3 px-4 text-left">Unit Price</th>
+                                <th class="py-3 px-4 text-left">Status</th>
+                                <th class="py-3 px-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I001</td>
+                                <td class="py-3 px-4">Chikibibi T-shirt</td>
+                                <td class="py-3 px-4">Clothing</td>
+                                <td class="py-3 px-4">120</td>
+                                <td class="py-3 px-4">$19.99</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">In Stock</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I002</td>
+                                <td class="py-3 px-4">Chikibibi Mug</td>
+                                <td class="py-3 px-4">Merchandise</td>
+                                <td class="py-3 px-4">45</td>
+                                <td class="py-3 px-4">$12.99</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">In Stock</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I003</td>
+                                <td class="py-3 px-4">Chikibibi Keychain</td>
+                                <td class="py-3 px-4">Accessories</td>
+                                <td class="py-3 px-4">8</td>
+                                <td class="py-3 px-4">$5.99</td>
+                                <td class="py-3 px-4"><span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">Low Stock</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Section: Manage Suppliers -->
+        <div id="admin-manage-suppliers" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToAdminDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Manage Suppliers</h1>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Supplier List</h2>
+                    <button class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md flex items-center transition duration-200">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Add New Supplier
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm leading-normal">
+                                <th class="py-3 px-4 text-left">ID</th>
+                                <th class="py-3 px-4 text-left">Supplier Name</th>
+                                <th class="py-3 px-4 text-left">Contact Person</th>
+                                <th class="py-3 px-4 text-left">Email</th>
+                                <th class="py-3 px-4 text-left">Phone</th>
+                                <th class="py-3 px-4 text-left">Status</th>
+                                <th class="py-3 px-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">S001</td>
+                                <td class="py-3 px-4">Textile Masters Inc.</td>
+                                <td class="py-3 px-4">Sarah Johnson</td>
+                                <td class="py-3 px-4">sarah@textilemaster.com</td>
+                                <td class="py-3 px-4">555-123-4567</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Active</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">S002</td>
+                                <td class="py-3 px-4">Global Merchandise Co.</td>
+                                <td class="py-3 px-4">Michael Chen</td>
+                                <td class="py-3 px-4">mchen@globalmerchandise.com</td>
+                                <td class="py-3 px-4">555-987-6543</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Active</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">S003</td>
+                                <td class="py-3 px-4">Accessory World Ltd.</td>
+                                <td class="py-3 px-4">Lisa Wong</td>
+                                <td class="py-3 px-4">lwong@accessoryworld.com</td>
+                                <td class="py-3 px-4">555-456-7890</td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">On Hold</span></td>
+                                <td class="py-3 px-4">
+                                    <div class="flex">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
+                                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Section: Transactions -->
+        <div id="admin-transactions" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToAdminDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Transactions</h1>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Transaction History</h2>
+                    <div class="flex gap-2">
+                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md flex items-center transition duration-200">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            Export
+                        </button>
+                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md flex items-center transition duration-200">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                            </svg>
+                            Filter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm leading-normal">
+                                <th class="py-3 px-4 text-left">ID</th>
+                                <th class="py-3 px-4 text-left">Date</th>
+                                <th class="py-3 px-4 text-left">Type</th>
+                                <th class="py-3 px-4 text-left">Item</th>
+                                <th class="py-3 px-4 text-left">Quantity</th>
+                                <th class="py-3 px-4 text-left">Staff</th>
+                                <th class="py-3 px-4 text-left">Status</th>
+                                <th class="py-3 px-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">T001</td>
+                                <td class="py-3 px-4">2023-05-15</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Inbound</span></td>
+                                <td class="py-3 px-4">Chikibibi T-shirt</td>
+                                <td class="py-3 px-4">50</td>
+                                <td class="py-3 px-4">Jane Smith</td>
+                                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">Completed</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">View</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">T002</td>
+                                <td class="py-3 px-4">2023-05-16</td>
+                                <td class="py-3 px-4"><span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">Outbound</span></td>
+                                <td class="py-3 px-4">Chikibibi Mug</td>
+                                <td class="py-3 px-4">15</td>
+                                <td class="py-3 px-4">Robert Johnson</td>
+                                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">Completed</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">View</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">T003</td>
+                                <td class="py-3 px-4">2023-05-17</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Inbound</span></td>
+                                <td class="py-3 px-4">Chikibibi Keychain</td>
+                                <td class="py-3 px-4">100</td>
+                                <td class="py-3 px-4">Jane Smith</td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">Pending</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Section: Low Stock Alerts -->
+        <div id="admin-low-stock-alerts" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToAdminDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Low Stock Alerts</h1>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Items Requiring Attention</h2>
+                    <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md flex items-center transition duration-200">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                        </svg>
+                        Configure Alerts
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm leading-normal">
+                                <th class="py-3 px-4 text-left">ID</th>
+                                <th class="py-3 px-4 text-left">Item Name</th>
+                                <th class="py-3 px-4 text-left">Current Stock</th>
+                                <th class="py-3 px-4 text-left">Threshold</th>
+                                <th class="py-3 px-4 text-left">Supplier</th>
+                                <th class="py-3 px-4 text-left">Status</th>
+                                <th class="py-3 px-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I003</td>
+                                <td class="py-3 px-4">Chikibibi Keychain</td>
+                                <td class="py-3 px-4 text-red-500 font-medium">8</td>
+                                <td class="py-3 px-4">20</td>
+                                <td class="py-3 px-4">Accessory World Ltd.</td>
+                                <td class="py-3 px-4"><span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">Critical</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-xs transition duration-200">
+                                        Order Now
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I007</td>
+                                <td class="py-3 px-4">Chikibibi Stickers</td>
+                                <td class="py-3 px-4 text-yellow-500 font-medium">25</td>
+                                <td class="py-3 px-4">30</td>
+                                <td class="py-3 px-4">Global Merchandise Co.</td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">Warning</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-xs transition duration-200">
+                                        Order Now
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I012</td>
+                                <td class="py-3 px-4">Chikibibi Tote Bag</td>
+                                <td class="py-3 px-4 text-yellow-500 font-medium">18</td>
+                                <td class="py-3 px-4">20</td>
+                                <td class="py-3 px-4">Textile Masters Inc.</td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">Warning</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-xs transition duration-200">
+                                        Order Now
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Dashboard -->
+    <div id="staff-dashboard" class="hidden min-h-screen staff-bg">
+        <nav class="bg-white shadow-md p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8 mr-2" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" stroke="#4CAF50" stroke-width="8"></circle>
+                        <path d="M30 50L45 65L70 35" stroke="#4CAF50" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-gray-800">Chikibibi Staff</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="mr-4">
+                        <span class="text-sm text-gray-600">Welcome, Staff</span>
+                    </div>
+                    <button onclick="logout()" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-md text-sm transition duration-200">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="staff-main" class="container mx-auto p-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Staff Dashboard</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Inventory Items -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showStaffSection('inventory-items')">
+                    <div class="p-6">
+                        <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Inventory Items</h2>
+                        <p class="text-gray-600">View and manage all inventory items and stock levels</p>
+                    </div>
+                    <div class="bg-green-50 px-6 py-3">
+                        <span class="text-green-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+
+                <!-- Suppliers -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showStaffSection('suppliers')">
+                    <div class="p-6">
+                        <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Suppliers</h2>
+                        <p class="text-gray-600">View supplier information and contact details</p>
+                    </div>
+                    <div class="bg-blue-50 px-6 py-3">
+                        <span class="text-blue-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+
+                <!-- Transactions -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showStaffSection('staff-transactions')">
+                    <div class="p-6">
+                        <div class="bg-yellow-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Transactions</h2>
+                        <p class="text-gray-600">Record and view inventory transactions</p>
+                    </div>
+                    <div class="bg-yellow-50 px-6 py-3">
+                        <span class="text-yellow-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+
+                <!-- Low Stock Alerts -->
+                <div class="section-card bg-white rounded-lg shadow-md overflow-hidden" onclick="showStaffSection('staff-low-stock-alerts')">
+                    <div class="p-6">
+                        <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Low Stock Alerts</h2>
+                        <p class="text-gray-600">View items that need to be restocked</p>
+                    </div>
+                    <div class="bg-red-50 px-6 py-3">
+                        <span class="text-red-500 font-medium">View Details →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Section: Inventory Items -->
+        <div id="staff-inventory-items" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToStaffDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Inventory Items</h1>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="mb-4 flex flex-wrap gap-2">
+                    <input type="text" placeholder="Search items..." class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 flex-grow">
+                    <select class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300">
+                        <option>All Categories</option>
+                        <option>Electronics</option>
+                        <option>Clothing</option>
+                        <option>Food</option>
+                    </select>
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md transition duration-200">
+                        Filter
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm leading-normal">
+                                <th class="py-3 px-4 text-left">ID</th>
+                                <th class="py-3 px-4 text-left">Item Name</th>
+                                <th class="py-3 px-4 text-left">Category</th>
+                                <th class="py-3 px-4 text-left">Quantity</th>
+                                <th class="py-3 px-4 text-left">Location</th>
+                                <th class="py-3 px-4 text-left">Status</th>
+                                <th class="py-3 px-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I001</td>
+                                <td class="py-3 px-4">Chikibibi T-shirt</td>
+                                <td class="py-3 px-4">Clothing</td>
+                                <td class="py-3 px-4">120</td>
+                                <td class="py-3 px-4">Rack A-3</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">In Stock</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Update</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I002</td>
+                                <td class="py-3 px-4">Chikibibi Mug</td>
+                                <td class="py-3 px-4">Merchandise</td>
+                                <td class="py-3 px-4">45</td>
+                                <td class="py-3 px-4">Shelf B-2</td>
+                                <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">In Stock</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Update</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I003</td>
+                                <td class="py-3 px-4">Chikibibi Keychain</td>
+                                <td class="py-3 px-4">Accessories</td>
+                                <td class="py-3 px-4">8</td>
+                                <td class="py-3 px-4">Drawer C-1</td>
+                                <td class="py-3 px-4"><span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">Low Stock</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Update</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I007</td>
+                                <td class="py-3 px-4">Chikibibi Stickers</td>
+                                <td class="py-3 px-4">Accessories</td>
+                                <td class="py-3 px-4">25</td>
+                                <td class="py-3 px-4">Drawer C-2</td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">Low Stock</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Section: Suppliers -->
+        <div id="staff-suppliers" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToStaffDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Suppliers</h1>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="mb-4">
+                    <input type="text" placeholder="Search suppliers..." class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300 w-full">
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm leading-normal">
+                                <th class="py-3 px-4 text-left">ID</th>
+                                <th class="py-3 px-4 text-left">Supplier Name</th>
+                                <th class="py-3 px-4 text-left">Contact Person</th>
+                                <th class="py-3 px-4 text-left">Email</th>
+                                <th class="py-3 px-4 text-left">Phone</th>
+                                <th class="py-3 px-4 text-left">Products</th>
+                                <th class="py-3 px-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">S001</td>
+                                <td class="py-3 px-4">Textile Masters Inc.</td>
+                                <td class="py-3 px-4">Sarah Johnson</td>
+                                <td class="py-3 px-4">sarah@textilemaster.com</td>
+                                <td class="py-3 px-4">555-123-4567</td>
+                                <td class="py-3 px-4">T-shirts, Tote Bags</td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Contact</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">S002</td>
+                                <td class="py-3 px-4">Global Merchandise Co.</td>
+                                <td class="py-3 px-4">Michael Chen</td>
+                                <td class="py-3 px-4">mchen@globalmerchandise.com</td>
+                                <td class="py-3 px-4">555-987-6543</td>
+                                <td class="py-3 px-4">Mugs, Stickers</td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Contact</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">S003</td>
+                                <td class="py-3 px-4">Accessory World Ltd.</td>
+                                <td class="py-3 px-4">Lisa Wong</td>
+                                <td class="py-3 px-4">lwong@accessoryworld.com</td>
+                                <td class="py-3 px-4">555-456-7890</td>
+                                <td class="py-3 px-4">Keychains, Pins</td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Contact</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Section: Transactions -->
+        <div id="staff-staff-transactions" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToStaffDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Transactions</h1>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Record New Transaction</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Transaction Type</label>
+                            <div class="flex gap-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="transaction-type" class="form-radio h-4 w-4 text-yellow-500" checked="">
+                                    <span class="ml-2">Inbound</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="transaction-type" class="form-radio h-4 w-4 text-yellow-500">
+                                    <span class="ml-2">Outbound</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Item</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300">
+                                <option>Select Item</option>
+                                <option>Chikibibi T-shirt</option>
+                                <option>Chikibibi Mug</option>
+                                <option>Chikibibi Keychain</option>
+                                <option>Chikibibi Stickers</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+                            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300" min="1">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+                            <textarea class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300" rows="3"></textarea>
+                        </div>
+                        <button type="button" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md transition duration-200">
+                            Record Transaction
+                        </button>
+                    </form>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Recent Transactions</h2>
+                    <div class="overflow-y-auto max-h-80">
+                        <div class="border-b border-gray-200 py-3">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Inbound</span>
+                                    <span class="ml-2 font-medium">Chikibibi T-shirt</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Today, 10:23 AM</span>
+                            </div>
+                            <div class="mt-1 text-sm">
+                                <span class="text-gray-600">Quantity: 50</span>
+                                <span class="mx-2">•</span>
+                                <span class="text-gray-600">By: Jane Smith</span>
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 py-3">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">Outbound</span>
+                                    <span class="ml-2 font-medium">Chikibibi Mug</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Today, 9:45 AM</span>
+                            </div>
+                            <div class="mt-1 text-sm">
+                                <span class="text-gray-600">Quantity: 15</span>
+                                <span class="mx-2">•</span>
+                                <span class="text-gray-600">By: You</span>
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 py-3">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Inbound</span>
+                                    <span class="ml-2 font-medium">Chikibibi Stickers</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Yesterday, 3:30 PM</span>
+                            </div>
+                            <div class="mt-1 text-sm">
+                                <span class="text-gray-600">Quantity: 200</span>
+                                <span class="mx-2">•</span>
+                                <span class="text-gray-600">By: Jane Smith</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <button class="text-yellow-500 hover:text-yellow-700 font-medium">View All Transactions</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Section: Low Stock Alerts -->
+        <div id="staff-staff-low-stock-alerts" class="hidden container mx-auto p-6">
+            <div class="flex items-center mb-6">
+                <button onclick="backToStaffDashboard()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-md flex items-center mr-4 transition duration-200">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back
+                </button>
+                <h1 class="text-3xl font-bold text-gray-800">Low Stock Alerts</h1>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Items Requiring Attention</h2>
+                    <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md flex items-center transition duration-200">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        Notify Manager
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm leading-normal">
+                                <th class="py-3 px-4 text-left">ID</th>
+                                <th class="py-3 px-4 text-left">Item Name</th>
+                                <th class="py-3 px-4 text-left">Current Stock</th>
+                                <th class="py-3 px-4 text-left">Threshold</th>
+                                <th class="py-3 px-4 text-left">Supplier</th>
+                                <th class="py-3 px-4 text-left">Status</th>
+                                <th class="py-3 px-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I003</td>
+                                <td class="py-3 px-4">Chikibibi Keychain</td>
+                                <td class="py-3 px-4 text-red-500 font-medium">8</td>
+                                <td class="py-3 px-4">20</td>
+                                <td class="py-3 px-4">Accessory World Ltd.</td>
+                                <td class="py-3 px-4"><span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">Critical</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Request Order</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I007</td>
+                                <td class="py-3 px-4">Chikibibi Stickers</td>
+                                <td class="py-3 px-4 text-yellow-500 font-medium">25</td>
+                                <td class="py-3 px-4">30</td>
+                                <td class="py-3 px-4">Global Merchandise Co.</td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">Warning</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Request Order</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">I012</td>
+                                <td class="py-3 px-4">Chikibibi Tote Bag</td>
+                                <td class="py-3 px-4 text-yellow-500 font-medium">18</td>
+                                <td class="py-3 px-4">20</td>
+                                <td class="py-3 px-4">Textile Masters Inc.</td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">Warning</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Request Order</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login function
+        function login() {
+            const userType = document.getElementById('user-type').value;
+            document.getElementById('login-page').classList.add('hidden');
+            
+            if (userType === 'admin') {
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+            } else {
+                document.getElementById('staff-dashboard').classList.remove('hidden');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('staff-dashboard').classList.add('hidden');
+            document.getElementById('login-page').classList.remove('hidden');
+        }
+
+        // Admin section navigation
+        function showAdminSection(sectionId) {
+            document.getElementById('admin-main').classList.add('hidden');
+            document.getElementById('admin-manage-users').classList.add('hidden');
+            document.getElementById('admin-manage-inventory').classList.add('hidden');
+            document.getElementById('admin-manage-suppliers').classList.add('hidden');
+            document.getElementById('admin-transactions').classList.add('hidden');
+            document.getElementById('admin-low-stock-alerts').classList.add('hidden');
+            
+            document.getElementById('admin-' + sectionId).classList.remove('hidden');
+        }
+
+        // Back to admin dashboard
+        function backToAdminDashboard() {
+            document.getElementById('admin-manage-users').classList.add('hidden');
+            document.getElementById('admin-manage-inventory').classList.add('hidden');
+            document.getElementById('admin-manage-suppliers').classList.add('hidden');
+            document.getElementById('admin-transactions').classList.add('hidden');
+            document.getElementById('admin-low-stock-alerts').classList.add('hidden');
+            
+            document.getElementById('admin-main').classList.remove('hidden');
+        }
+
+        // Staff section navigation
+        function showStaffSection(sectionId) {
+            document.getElementById('staff-main').classList.add('hidden');
+            document.getElementById('staff-inventory-items').classList.add('hidden');
+            document.getElementById('staff-suppliers').classList.add('hidden');
+            document.getElementById('staff-staff-transactions').classList.add('hidden');
+            document.getElementById('staff-staff-low-stock-alerts').classList.add('hidden');
+            
+            document.getElementById('staff-' + sectionId).classList.remove('hidden');
+        }
+
+        // Back to staff dashboard
+        function backToStaffDashboard() {
+            document.getElementById('staff-inventory-items').classList.add('hidden');
+            document.getElementById('staff-suppliers').classList.add('hidden');
+            document.getElementById('staff-staff-transactions').classList.add('hidden');
+            document.getElementById('staff-staff-low-stock-alerts').classList.add('hidden');
+            
+            document.getElementById('staff-main').classList.remove('hidden');
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95faf016f1534ee7',t:'MTc1MjYwMDEwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+
+</body></html>
