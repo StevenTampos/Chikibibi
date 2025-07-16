@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $stmt = $mysqli->prepare("SELECT UserID, Name, Role, Password FROM User WHERE Email = ?");
+    $stmt = $mysqli->prepare("SELECT UserID, Name, Role, Password FROM user WHERE Email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
@@ -15,11 +15,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_result($UserID, $Name, $Role, $StoredPassword);
         $stmt->fetch();
 
-        if ($password === $StoredPassword) { // bypassed check
+        $loginSuccess = false;
+
+        if (password_verify($password, $StoredPassword)) {
+            $loginSuccess = true;
+        } 
+        
+        elseif ($password === $StoredPassword) {
+            $newHash = password_hash($password, PASSWORD_DEFAULT);
+            $update = $mysqli->prepare("UPDATE user SET Password=? WHERE UserID=?");
+            $update->bind_param("si", $newHash, $UserID);
+            $update->execute();
+            $loginSuccess = true;
+        }
+
+        if ($loginSuccess) {
             $_SESSION['UserID'] = $UserID;
             $_SESSION['Name'] = $Name;
             $_SESSION['Role'] = $Role;
-            
+
             if ($Role === 'Admin') {
                 header("Location: admin.php");
             } elseif ($Role === 'Inventory Staff') {
@@ -36,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>

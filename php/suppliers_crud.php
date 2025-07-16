@@ -27,7 +27,7 @@ if (isset($_POST['save_supplier'])) {
 
     if ($supplier_id > 0) {
         // UPDATE existing supplier
-        $stmt = $mysqli->prepare("UPDATE Supplier SET SupplierName=?, ContactPerson=?, PhoneNumber=?, Email=?, Address=? WHERE SupplierID=?");
+        $stmt = $mysqli->prepare("UPDATE supplier SET SupplierName=?, ContactPerson=?, PhoneNumber=?, Email=?, Address=? WHERE SupplierID=?");
         $stmt->bind_param("sssssi", $name, $contact, $phone, $email, $address, $supplier_id);
 
         if ($stmt->execute()) {
@@ -42,7 +42,7 @@ if (isset($_POST['save_supplier'])) {
 
     } else {
         // INSERT new supplier
-        $stmt = $mysqli->prepare("INSERT INTO Supplier (SupplierName, ContactPerson, PhoneNumber, Email, Address) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $mysqli->prepare("INSERT INTO supplier (SupplierName, ContactPerson, PhoneNumber, Email, Address) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $name, $contact, $phone, $email, $address);
 
         if ($stmt->execute()) {
@@ -60,7 +60,7 @@ if (isset($_POST['save_supplier'])) {
 // Delete supplier
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
-    if ($mysqli->query("DELETE FROM Supplier WHERE SupplierID=$id")) {
+    if ($mysqli->query("DELETE FROM supplier WHERE SupplierID=$id")) {
         $_SESSION['banner_type'] = "success";
         $_SESSION['banner_message'] = "✅ Supplier deleted successfully!";
     } else {
@@ -75,12 +75,12 @@ if (isset($_GET['delete'])) {
 $edit_supplier = null;
 if (isset($_GET['edit'])) {
     $edit_id = intval($_GET['edit']);
-    $res = $mysqli->query("SELECT * FROM Supplier WHERE SupplierID=$edit_id LIMIT 1");
+    $res = $mysqli->query("SELECT * FROM supplier WHERE SupplierID=$edit_id LIMIT 1");
     $edit_supplier = $res->fetch_assoc();
 }
 
 // Fetch all suppliers
-$result = $mysqli->query("SELECT * FROM Supplier ORDER BY SupplierName ASC");
+$result = $mysqli->query("SELECT * FROM supplier ORDER BY SupplierName ASC");
 ?>
 
 <div id="admin-manage-suppliers" class="container mx-auto p-6">

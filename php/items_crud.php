@@ -30,7 +30,7 @@ if (isset($_POST['save_item'])) {
 
     if ($item_id > 0) {
         // UPDATE existing item
-        $stmt = $mysqli->prepare("UPDATE Inventory 
+        $stmt = $mysqli->prepare("UPDATE inventory 
             SET ItemName=?, Quantity=?, MinimumStock=?, PricePerUnit=?, Category=?, ExpiryDate=?, SupplierID=?, DateReceived=? 
             WHERE InventoryID=?");
         $stmt->bind_param("siidssisi", $name, $qty, $min, $price, $cat, $expiry, $supplier, $date_recv, $item_id);
@@ -45,7 +45,7 @@ if (isset($_POST['save_item'])) {
         }
     } else {
         // INSERT new item
-        $stmt = $mysqli->prepare("INSERT INTO Inventory 
+        $stmt = $mysqli->prepare("INSERT INTO inventory 
             (ItemName, Quantity, MinimumStock, PricePerUnit, Category, ExpiryDate, SupplierID, DateReceived) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("siidssis", $name, $qty, $min, $price, $cat, $expiry, $supplier, $date_recv);
@@ -64,7 +64,7 @@ if (isset($_POST['save_item'])) {
 // Delete Item
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
-    if ($mysqli->query("DELETE FROM Inventory WHERE InventoryID=$id")) {
+    if ($mysqli->query("DELETE FROM inventory WHERE InventoryID=$id")) {
         $_SESSION['banner_type'] = "success";
         $_SESSION['banner_message'] = "✅ Item deleted successfully!";
         header("Location: items_crud.php");
@@ -79,17 +79,17 @@ if (isset($_GET['delete'])) {
 $edit_item = null;
 if (isset($_GET['edit'])) {
     $edit_id = intval($_GET['edit']);
-    $res = $mysqli->query("SELECT * FROM Inventory WHERE InventoryID=$edit_id LIMIT 1");
+    $res = $mysqli->query("SELECT * FROM inventory WHERE InventoryID=$edit_id LIMIT 1");
     $edit_item = $res->fetch_assoc();
 }
 
 // Fetch suppliers for dropdown
-$suppliers = $mysqli->query("SELECT SupplierID, SupplierName FROM Supplier");
+$suppliers = $mysqli->query("SELECT SupplierID, SupplierName FROM supplier");
 
 // List all inventory items with supplier name
-$items = $mysqli->query("SELECT Inventory.*, Supplier.SupplierName 
-                         FROM Inventory 
-                         LEFT JOIN Supplier ON Inventory.SupplierID = Supplier.SupplierID");
+$items = $mysqli->query("SELECT inventory.*, supplier.SupplierName 
+                         FROM inventory 
+                         LEFT JOIN supplier ON inventory.SupplierID = supplier.SupplierID");
 ?>
 
 <div id="admin-manage-inventory" class="container mx-auto p-6">

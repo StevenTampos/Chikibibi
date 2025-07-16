@@ -26,21 +26,21 @@ if (isset($_POST['save_transaction'])) {
 
     if ($transaction_id > 0) {
         // 1. Fetch original transaction
-        $original = $mysqli->query("SELECT * FROM Transaction WHERE TransactionID = $transaction_id")->fetch_assoc();
+        $original = $mysqli->query("SELECT * FROM transaction WHERE TransactionID = $transaction_id")->fetch_assoc();
         $original_qty       = $original['QuantityUsed'];
         $original_action    = $original['ActionType'];
         $original_inventory = $original['InventoryID'];
 
         // 2. Reverse original effect on inventory
         if ($original_action === 'Usage') {
-            $mysqli->query("UPDATE Inventory SET Quantity = Quantity + $original_qty WHERE InventoryID = $original_inventory");
+            $mysqli->query("UPDATE inventory SET Quantity = Quantity + $original_qty WHERE InventoryID = $original_inventory");
         } else {
-            $mysqli->query("UPDATE Inventory SET Quantity = Quantity - $original_qty WHERE InventoryID = $original_inventory");
+            $mysqli->query("UPDATE inventory SET Quantity = Quantity - $original_qty WHERE InventoryID = $original_inventory");
         }
 
         // 3. Apply new values
         $stmt = $mysqli->prepare("
-            UPDATE Transaction 
+            UPDATE transaction 
             SET InventoryID=?, Date=?, QuantityUsed=?, ActionType=?, UserID=? 
             WHERE TransactionID=?
         ");
@@ -49,9 +49,9 @@ if (isset($_POST['save_transaction'])) {
         if ($stmt->execute()) {
             // 4. Apply new effect
             if ($action === 'Usage') {
-                $mysqli->query("UPDATE Inventory SET Quantity = Quantity - $qty_used WHERE InventoryID = $inventory_id");
+                $mysqli->query("UPDATE inventory SET Quantity = Quantity - $qty_used WHERE InventoryID = $inventory_id");
             } else {
-                $mysqli->query("UPDATE Inventory SET Quantity = Quantity + $qty_used WHERE InventoryID = $inventory_id");
+                $mysqli->query("UPDATE inventory SET Quantity = Quantity + $qty_used WHERE InventoryID = $inventory_id");
             }
 
             $_SESSION['banner_type']    = "success";
@@ -66,7 +66,7 @@ if (isset($_POST['save_transaction'])) {
     } else {
         // INSERT NEW
         $stmt = $mysqli->prepare("
-            INSERT INTO Transaction (InventoryID, Date, QuantityUsed, ActionType, UserID) 
+            INSERT INTO transaction (InventoryID, Date, QuantityUsed, ActionType, UserID) 
             VALUES (?, ?, ?, ?, ?)
         ");
         $stmt->bind_param("isisi", $inventory_id, $date, $qty_used, $action, $user_id);
@@ -74,9 +74,9 @@ if (isset($_POST['save_transaction'])) {
         if ($stmt->execute()) {
             // Apply effect on inventory
             if ($action === 'Usage') {
-                $mysqli->query("UPDATE Inventory SET Quantity = Quantity - $qty_used WHERE InventoryID = $inventory_id");
+                $mysqli->query("UPDATE inventory SET Quantity = Quantity - $qty_used WHERE InventoryID = $inventory_id");
             } else {
-                $mysqli->query("UPDATE Inventory SET Quantity = Quantity + $qty_used WHERE InventoryID = $inventory_id");
+                $mysqli->query("UPDATE inventory SET Quantity = Quantity + $qty_used WHERE InventoryID = $inventory_id");
             }
 
             $_SESSION['banner_type']    = "success";
@@ -95,20 +95,20 @@ if (isset($_POST['save_transaction'])) {
 $edit_transaction = null;
 if (isset($_GET['edit'])) {
     $edit_id = intval($_GET['edit']);
-    $res = $mysqli->query("SELECT * FROM Transaction WHERE TransactionID=$edit_id LIMIT 1");
+    $res = $mysqli->query("SELECT * FROM transaction WHERE TransactionID=$edit_id LIMIT 1");
     $edit_transaction = $res->fetch_assoc();
 }
 
 // Fetch all inventory items for dropdown
-$items = $mysqli->query("SELECT InventoryID, ItemName FROM Inventory");
+$items = $mysqli->query("SELECT InventoryID, ItemName FROM inventory");
 
 // Fetch all transactions with user name & role
 $result = $mysqli->query("
     SELECT t.TransactionID, t.Date, t.QuantityUsed, t.ActionType, 
            i.ItemName,
            u.Name AS UserName, u.Role AS UserRole
-    FROM Transaction t 
-    JOIN Inventory i ON t.InventoryID = i.InventoryID 
+    FROM transaction t 
+    JOIN inventory i ON t.InventoryID = i.InventoryID 
     JOIN user u ON t.UserID = u.UserID
     ORDER BY t.Date DESC
 ");

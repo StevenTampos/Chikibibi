@@ -8,9 +8,9 @@ include '../templates/header_staff.php';
 require_once '../config.php';
 
 // List all inventory items with supplier name
-$items = $mysqli->query("SELECT Inventory.*, Supplier.SupplierName 
-                         FROM Inventory 
-                         LEFT JOIN Supplier ON Inventory.SupplierID = Supplier.SupplierID");
+$items = $mysqli->query("SELECT inventory.*, supplier.SupplierName 
+                         FROM inventory 
+                         LEFT JOIN supplier ON inventory.SupplierID = supplier.SupplierID");
 ?>
 
 <div id="admin-manage-inventory" class="container mx-auto p-6">

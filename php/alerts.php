@@ -11,7 +11,7 @@ require_once '../config.php';
 // Fetch low stock items
 $alerts = $mysqli->query("
     SELECT ItemName, Quantity, MinimumStock
-    FROM Inventory
+    FROM inventory
     WHERE Quantity < MinimumStock
 ");
 ?>

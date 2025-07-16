@@ -6,23 +6,22 @@ if ($_SESSION['Role'] !== 'Admin') {
 }
 require_once '../config.php';
 include '../templates/header_admin.php';
+
 if (isset($_SESSION['banner_message'])) {
     $banner_message = $_SESSION['banner_message'];
     $banner_type = $_SESSION['banner_type'];
-    unset($_SESSION['banner_message']);
-    unset($_SESSION['banner_type']);
+    unset($_SESSION['banner_message'], $_SESSION['banner_type']);
 }
 
-
-// add or update user 
+// Add or Update User 
 if (isset($_POST['save_user'])) {
     $name = trim($_POST['name']);
     $role = trim($_POST['role']);
     $email = trim($_POST['email']);
-    $password = $_POST['password'];
+    $password = $_POST['password']; // raw input
     $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 0;
 
-    // duplicate email
+    // Check duplicate email
     $check = $mysqli->prepare("SELECT UserID FROM user WHERE Email = ? AND UserID != ?");
     $check->bind_param("si", $email, $user_id);
     $check->execute();
@@ -31,68 +30,73 @@ if (isset($_POST['save_user'])) {
     if ($check->num_rows > 0) {
         $_SESSION['banner_type'] = "error";
         $_SESSION['banner_message'] = "❌ Email already exists!";
+        header("Location: users_crud.php");
         exit();
     } else {
-        // cannot demote
+        // Cannot demote self
         if ($user_id > 0) {
             if ($user_id == $_SESSION['UserID'] && $role !== 'Admin') {
                 $_SESSION['banner_type'] = "error";
                 $_SESSION['banner_message'] = "❌ You cannot change your own role!";
-                exit();
-            } else {
-                // update user
-                if ($password) {
-                    $stmt = $mysqli->prepare("UPDATE user SET Name=?, Role=?, Email=?, Password=? WHERE UserID=?");
-                    $stmt->bind_param("ssssi", $name, $role, $email, $password, $user_id);
-                } else {
-                    $stmt = $mysqli->prepare("UPDATE user SET Name=?, Role=?, Email=? WHERE UserID=?");
-                    $stmt->bind_param("sssi", $name, $role, $email, $user_id);
-                }
-                if ($stmt->execute()) {
-                    $_SESSION['banner_type'] = "success";
-                    $_SESSION['banner_message'] = "✅ User updated successfully!";
-                    header("Location: users_crud.php");
-                    exit();
-                } else {
-                    $_SESSION['banner_type'] = "error";
-                    $_SESSION['banner_message'] = "❌ Failed to update user!";
-                    exit();
-                }
-            }
-        } else {
-            // insert user
-            $stmt = $mysqli->prepare("INSERT INTO user (Name, Role, Email, Password) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $name, $role, $email, $password);
-            if ($stmt->execute()) {
-                $_SESSION['banner_type'] = "success";
-                $_SESSION['banner_message'] = "✅ User added successfully!";
                 header("Location: users_crud.php");
                 exit();
             } else {
-                $_SESSION['banner_type'] = "error";
-                $_SESSION['banner_message'] = "❌ Failed to add user!";
+                // Updating user
+                if (!empty($password)) {
+                    // Hash new password
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                    $stmt = $mysqli->prepare("UPDATE user SET Name=?, Role=?, Email=?, Password=? WHERE UserID=?");
+                    $stmt->bind_param("ssssi", $name, $role, $email, $hashedPassword, $user_id);
+                } else {
+                    // Keep existing password
+                    $stmt = $mysqli->prepare("UPDATE user SET Name=?, Role=?, Email=? WHERE UserID=?");
+                    $stmt->bind_param("sssi", $name, $role, $email, $user_id);
+                }
+
+                if ($stmt->execute()) {
+                    $_SESSION['banner_type'] = "success";
+                    $_SESSION['banner_message'] = "✅ User updated successfully!";
+                } else {
+                    $_SESSION['banner_type'] = "error";
+                    $_SESSION['banner_message'] = "❌ Failed to update user!";
+                }
+                header("Location: users_crud.php");
                 exit();
             }
+        } else {
+            // Insert new user
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $mysqli->prepare("INSERT INTO user (Name, Role, Email, Password) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $name, $role, $email, $hashedPassword);
+
+            if ($stmt->execute()) {
+                $_SESSION['banner_type'] = "success";
+                $_SESSION['banner_message'] = "✅ User added successfully!";
+            } else {
+                $_SESSION['banner_type'] = "error";
+                $_SESSION['banner_message'] = "❌ Failed to add user!";
+            }
+            header("Location: users_crud.php");
+            exit();
         }
     }
 }
 
-// delete user
+// Delete user
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
     if ($mysqli->query("DELETE FROM user WHERE UserID=$id")) {
         $_SESSION['banner_type'] = "success";
         $_SESSION['banner_message'] = "✅ User deleted successfully!";
-        header("Location: users_crud.php");
-        exit();
     } else {
         $_SESSION['banner_type'] = "error";
         $_SESSION['banner_message'] = "❌ Failed to delete user!";
-        exit();
     }
+    header("Location: users_crud.php");
+    exit();
 }
 
-// fetch data for editng
+// Fetch user for editing
 $edit_user = null;
 if (isset($_GET['edit'])) {
     $edit_id = intval($_GET['edit']);
@@ -100,7 +104,7 @@ if (isset($_GET['edit'])) {
     $edit_user = $res->fetch_assoc();
 }
 
-// list users
+// ✅ List all users
 $result = $mysqli->query("SELECT * FROM user ORDER BY CreatedAt DESC");
 ?>
 

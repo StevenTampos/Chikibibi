@@ -9,7 +9,7 @@ require_once '../config.php';
 include '../templates/header_staff.php';
 
 // Fetch all suppliers
-$result = $mysqli->query("SELECT * FROM Supplier ORDER BY SupplierName ASC");
+$result = $mysqli->query("SELECT * FROM supplier ORDER BY SupplierName ASC");
 ?>
 
 <div id="admin-manage-suppliers" class="container mx-auto p-6">
