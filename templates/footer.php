@@ -1,7 +1,2 @@
-</main>
-<footer>
-    <p>&copy; 2025 Chikibibi</p>
-</footer>
-</body>
-
+</div>
 </html>

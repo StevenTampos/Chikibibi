@@ -1,12 +1,12 @@
 <?php
 session_start();
-if ($_SESSION['Role'] !== 'Admin') {
+if ($_SESSION['Role'] !== 'Inventory Staff') {
     include '../templates/access_denied.php';
     exit();
 }
 
 require_once '../config.php';
-include '../templates/header_admin.php';
+include '../templates/header_staff.php';
 
 // Show banner if exists
 if (isset($_SESSION['banner_message'])) {
@@ -61,7 +61,7 @@ if (isset($_POST['save_transaction'])) {
             $_SESSION['banner_message'] = "❌ Failed to update transaction!";
         }
 
-        header("Location: transactions_crud.php");
+        header("Location: transactions.php");
         exit();
     } else {
         // INSERT NEW
@@ -86,39 +86,9 @@ if (isset($_POST['save_transaction'])) {
             $_SESSION['banner_message'] = "❌ Failed to record transaction!";
         }
 
-        header("Location: transactions_crud.php");
+        header("Location: transactions.php");
         exit();
     }
-}
-
-// Delete Transaction
-if (isset($_GET['delete'])) {
-    $id = intval($_GET['delete']);
-
-    // reverse its effect before deletion
-    $original = $mysqli->query("SELECT * FROM Transaction WHERE TransactionID=$id")->fetch_assoc();
-    if ($original) {
-        $rev_qty       = $original['QuantityUsed'];
-        $rev_action    = $original['ActionType'];
-        $rev_inventory = $original['InventoryID'];
-
-        // reverse inventory impact
-        if ($rev_action === 'Usage') {
-            $mysqli->query("UPDATE Inventory SET Quantity = Quantity + $rev_qty WHERE InventoryID = $rev_inventory");
-        } else {
-            $mysqli->query("UPDATE Inventory SET Quantity = Quantity - $rev_qty WHERE InventoryID = $rev_inventory");
-        }
-    }
-
-    if ($mysqli->query("DELETE FROM Transaction WHERE TransactionID=$id")) {
-        $_SESSION['banner_type']    = "success";
-        $_SESSION['banner_message'] = "✅ Transaction deleted successfully!";
-    } else {
-        $_SESSION['banner_type']    = "error";
-        $_SESSION['banner_message'] = "❌ Failed to delete transaction!";
-    }
-    header("Location: transactions_crud.php");
-    exit();
 }
 
 // Fetch transaction for editing
@@ -132,7 +102,7 @@ if (isset($_GET['edit'])) {
 // Fetch all inventory items for dropdown
 $items = $mysqli->query("SELECT InventoryID, ItemName FROM Inventory");
 
-// ✅ Fetch all transactions with user name & role
+// Fetch all transactions with user name & role
 $result = $mysqli->query("
     SELECT t.TransactionID, t.Date, t.QuantityUsed, t.ActionType, 
            i.ItemName,
@@ -183,7 +153,6 @@ $result = $mysqli->query("
                         <th class="py-3 px-4 text-left">Quantity</th>
                         <th class="py-3 px-4 text-left">Type</th>
                         <th class="py-3 px-4 text-left">User</th>
-                        <th class="py-3 px-4 text-left">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm">
@@ -199,6 +168,7 @@ $result = $mysqli->query("
                                     <span class="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded">Restock</span>
                                 <?php } ?>
                             </td>
+
                             <td class="py-3 px-4">
                                 <?= htmlspecialchars($row['UserName']) ?>
                                 <?php if ($row['UserRole'] === 'Admin') { ?>
@@ -206,15 +176,6 @@ $result = $mysqli->query("
                                 <?php } else { ?>
                                     <span class="ml-2 bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Staff</span>
                                 <?php } ?>
-                            </td>
-                            <td class="py-3 px-4">
-                                <div class="flex gap-2">
-                                    <a href="?edit=<?= $row['TransactionID'] ?>" class="text-blue-500 hover:text-blue-700">Edit</a>
-                                    <a href="?delete=<?= $row['TransactionID'] ?>" class="text-red-500 hover:text-red-700"
-                                       onclick="return confirm('Are you sure you want to delete this transaction?')">
-                                       Delete
-                                    </a>
-                                </div>
                             </td>
                         </tr>
                     <?php } ?>
@@ -248,7 +209,7 @@ $result = $mysqli->query("
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Item</label>
                     <select name="inventory_id" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300">
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-300">
                         <option disabled selected>Select Item</option>
                         <?php while ($item = $items->fetch_assoc()) { ?>
                             <option value="<?= $item['InventoryID'] ?>"
@@ -264,7 +225,7 @@ $result = $mysqli->query("
                     <label class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
                     <input type="number" name="quantity_used" required
                         value="<?= $edit_transaction['QuantityUsed'] ?? '' ?>"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-300"
                         placeholder="Enter quantity">
                 </div>
 
@@ -272,7 +233,7 @@ $result = $mysqli->query("
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Action</label>
                     <select name="action" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300">
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-300">
                         <option value="Usage" <?= isset($edit_transaction['ActionType']) && $edit_transaction['ActionType'] === 'Usage' ? 'selected' : '' ?>>Usage</option>
                         <option value="Restock" <?= isset($edit_transaction['ActionType']) && $edit_transaction['ActionType'] === 'Restock' ? 'selected' : '' ?>>Restock</option>
                     </select>
@@ -283,7 +244,7 @@ $result = $mysqli->query("
                     <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
                     <input type="date" name="date" required
                         value="<?= $edit_transaction['Date'] ?? '' ?>"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300">
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-300">
                 </div>
             </div>
         </form>

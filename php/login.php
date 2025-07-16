@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['Role'] = $Role;
             
             if ($Role === 'Admin') {
-                header("Location: dashboard_admin.php");
+                header("Location: admin.php");
             } elseif ($Role === 'Inventory Staff') {
-                header("Location: dashboard_staff.php");
+                header("Location: staff.php");
             } else {
                 $error = "Unknown role.";
             }
