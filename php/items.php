@@ -7,14 +7,19 @@ if ($_SESSION['Role'] !== 'Inventory Staff') {
 include '../templates/header_staff.php';
 require_once '../config.php';
 
+// Fetch suppliers for dropdown
+$suppliers = $mysqli->query("SELECT SupplierID, SupplierName FROM supplier");
+
 // List all inventory items with supplier name
 $items = $mysqli->query("SELECT inventory.*, supplier.SupplierName 
                          FROM inventory 
                          LEFT JOIN supplier ON inventory.SupplierID = supplier.SupplierID");
+
+// Fetch supplier list for filtering
+$supplierListForFilter = $mysqli->query("SELECT SupplierName FROM supplier");
 ?>
 
 <div id="admin-manage-inventory" class="container mx-auto p-6">
-
     <div class="flex items-center mb-6">
         <a href="<?= $_SESSION['Role'] === 'Admin' ? 'admin' : 'staff' ?>.php" class="back-btn">
             <button
@@ -44,6 +49,17 @@ $items = $mysqli->query("SELECT inventory.*, supplier.SupplierName
                     <option value="">All Categories</option>
                     <option value="Chicken">Chicken</option>
                     <option value="Pork">Pork</option>
+                    <option value="Item">Item</option>
+                </select>
+
+                <!-- Supplier Filter -->
+                <select id="supplierFilter" class="px-3 py-2 border rounded-md">
+                    <option value="">All Suppliers</option>
+                    <?php while ($sf = $supplierListForFilter->fetch_assoc()) { ?>
+                        <option value="<?= htmlspecialchars($sf['SupplierName']) ?>">
+                            <?= htmlspecialchars($sf['SupplierName']) ?>
+                        </option>
+                    <?php } ?>
                 </select>
 
                 <!-- Sort by Total Price -->
@@ -76,6 +92,7 @@ $items = $mysqli->query("SELECT inventory.*, supplier.SupplierName
                         <th class="py-3 px-4 text-left">Expiry</th>
                         <th class="py-3 px-4 text-left">Supplier</th>
                         <th class="py-3 px-4 text-left">Date Received</th>
+                        <th class="py-3 px-4 text-left">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm">
@@ -83,15 +100,13 @@ $items = $mysqli->query("SELECT inventory.*, supplier.SupplierName
                         $total_price = $row['Quantity'] * $row['PricePerUnit']; ?>
                         <tr class="border-b border-gray-200 hover:bg-gray-50"
                             data-category="<?= htmlspecialchars($row['Category']) ?>"
-                            data-date="<?= $row['DateReceived'] ?>" data-total="<?= $total_price ?>">
+                            data-date="<?= $row['DateReceived'] ?>" data-total="<?= $total_price ?>"
+                            data-supplier="<?= htmlspecialchars($row['SupplierName'] ?: 'Others') ?>">
                             <td class="py-3 px-4"><?= htmlspecialchars($row['ItemName']) ?></td>
                             <td class="py-3 px-4"><?= $row['Quantity'] ?></td>
                             <td class="py-3 px-4"><?= $row['MinimumStock'] ?></td>
                             <td class="py-3 px-4">₱<?= number_format($row['PricePerUnit'], 2) ?></td>
-
-                            <!-- Show Total Price -->
                             <td class="py-3 px-4 font-semibold">₱<?= number_format($total_price, 2) ?></td>
-
                             <td class="py-3 px-4"><?= htmlspecialchars($row['Category']) ?></td>
                             <td class="py-3 px-4">
                                 <?= (!empty($row['ExpiryDate']) && $row['ExpiryDate'] !== '0000-00-00')
@@ -100,6 +115,12 @@ $items = $mysqli->query("SELECT inventory.*, supplier.SupplierName
                             </td>
                             <td class="py-3 px-4"><?= $row['SupplierName'] ?: 'Others' ?></td>
                             <td class="py-3 px-4"><?= $row['DateReceived'] ?></td>
+                            <td class="py-3 px-4 flex gap-2">
+                                <a href="?edit=<?= $row['InventoryID'] ?>"
+                                    class="text-blue-500 hover:text-blue-700">Edit</a>
+                                <a href="?delete=<?= $row['InventoryID'] ?>" class="text-red-500 hover:text-red-700"
+                                    onclick="return confirm('Delete this item?')">Delete</a>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -116,6 +137,7 @@ $items = $mysqli->query("SELECT inventory.*, supplier.SupplierName
         const rows = Array.from(table.querySelectorAll("tr"));
 
         const categoryFilter = document.getElementById("categoryFilter");
+        const supplierFilter = document.getElementById("supplierFilter");
         const sortPrice = document.getElementById("sortPrice");
         const startDate = document.getElementById("startDate");
         const endDate = document.getElementById("endDate");
@@ -123,48 +145,43 @@ $items = $mysqli->query("SELECT inventory.*, supplier.SupplierName
 
         function filterAndSort() {
             let categoryVal = categoryFilter.value;
+            let supplierVal = supplierFilter.value;
             let sortVal = sortPrice.value;
             let startVal = startDate.value;
             let endVal = endDate.value;
 
-            // Filter rows
             let filtered = rows.filter(row => {
                 let rowCat = row.dataset.category;
                 let rowDate = row.dataset.date;
+                let rowSupplier = row.dataset.supplier;
 
-                // Category match
                 if (categoryVal && rowCat !== categoryVal) return false;
-
-                // Date range match
+                if (supplierVal && rowSupplier !== supplierVal) return false;
                 if (startVal && rowDate < startVal) return false;
                 if (endVal && rowDate > endVal) return false;
 
                 return true;
             });
 
-            // Sort by total price
             if (sortVal === "desc") {
                 filtered.sort((a, b) => parseFloat(b.dataset.total) - parseFloat(a.dataset.total));
             } else if (sortVal === "asc") {
                 filtered.sort((a, b) => parseFloat(a.dataset.total) - parseFloat(b.dataset.total));
             }
 
-            // Clear table
             table.innerHTML = "";
-
-            // Re-add rows
             filtered.forEach(row => table.appendChild(row));
         }
 
-        // Event listeners
         categoryFilter.addEventListener("change", filterAndSort);
+        supplierFilter.addEventListener("change", filterAndSort);
         sortPrice.addEventListener("change", filterAndSort);
         startDate.addEventListener("change", filterAndSort);
         endDate.addEventListener("change", filterAndSort);
 
-        // Reset filters
         resetFilters.addEventListener("click", () => {
             categoryFilter.value = "";
+            supplierFilter.value = "";
             sortPrice.value = "";
             startDate.value = "";
             endDate.value = "";

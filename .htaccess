@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# ✅ 1. Force HTTPS only if not already using it
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ✅ 2. Stop looping by skipping requests that are already for index.php or other real files
+RewriteCond %{REQUEST_URI} !^/index\.php$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# ✅ 3. Redirect everything else to index.php ONCE
+RewriteRule ^.*$ /index.php [L]

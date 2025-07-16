@@ -23,7 +23,7 @@
             </div>
             <div class="flex items-center">
                 <div class="mr-4">
-                    <span class="text-sm text-gray-600">Welcome, Staff</span>
+                    <span class="text-sm text-gray-600">Welcome, Staff!</span>
                 </div>
                 <a href="logout.php" class="logout-link">
                     <button
